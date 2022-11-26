@@ -1,0 +1,69 @@
+.home-main {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: url("../../../assests/bub.gif");
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 10px;
+    .main-box {
+        background: linear-gradient(190.81deg, #bafff7 11.23%, rgba(186, 255, 247, 0.84) 91.98%);
+        height: 100%;
+    }
+    .top {
+        height: 20%;
+        .cars {
+            width: 40%;
+            position: absolute;
+            left: 0;
+        }
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 60px;
+            .btns {
+                padding: 10px 50px;
+                border-radius: 20px;
+                border: none;
+                outline: none;
+                background-color: lightpink;
+                font-size: 1.3rem;
+                font-weight: 600;
+            }
+            .btns:hover {
+                background-color: cyan;
+            }
+        }
+
+        .content-top {
+            // text-align: center;
+            width: 30%;
+            padding-top: 60px;
+            margin: 0 auto;
+            .wel {
+                font-size: 4rem;
+            }
+            .sho {
+                font-size: 4rem;
+                margin-left: 120px;
+            }
+        }
+        .links {
+            text-decoration: none;
+            color: black;
+        }
+    }
+    .bottom {
+        height: 80%;
+
+        .trucks {
+            width: 30%;
+            object-fit: cover;
+            position: absolute;
+            right: 20px;
+            bottom: 30px;
+        }
+    }
+}
