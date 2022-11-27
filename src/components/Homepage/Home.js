@@ -4,7 +4,7 @@ import datas from './../Data/Data';
 import './styles/Home.scss';
 import { Modal } from "bootstrap";
 
-// import emailjs from "emailjs-com";
+import emailjs from "emailjs-com";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -60,67 +60,101 @@ function Home() {
         bsModal.hide();
     };
 
+    const [sendmails, setSendMail] = useState({
+        user_name: "",
+        user_email: "",
+        user_score: ""
+    });
+
+    const { user_email, user_name, user_score } = sendmails;
+
+    const handleChange = (e) => {
+        setSendMail({ ...Home.sendmails, [e.target.name]: arguments.target.value });
+    }
+
+
+
 
     const sendMail = (e) => {
         e.preventDefault();
-        // if (e.target === "") {
-        //     toast("plss field is empty!!!")
-        // }
+
+        console.log(sendmails, "kalai amma appa");
         // emailjs
         //     .sendForm(
-        //         "new-mail-contact",
-        //         "template_28bus1a",
-        //         e.target,
-        //         "uoeS6Kk01IqV3ceeC"
+        //         "service_9w8q0y9",
+        //         "template_1xpu9zq",
+        //         datas,
+        //         "WjaU6fWuAvTLzZ6cY"
         //     )
         //     .then((e) => {
         //         console.log(e.text);
-        //         toast("Successfully Send Message...😀")
+        //         toast("Successfully Send Message...😀");
+        //         hideModal()
         //     })
         //     .catch((er) => {
         //         console.log(er);
         //         toast("Check Your Internet Connection...🥺")
         //     });
         // e.target.reset();
+
+
+
+
+
     };
 
     return (
         <div className='main-section'>
 
-            <div className='inside-section'>
+            <ToastContainer />
+
+            <div className='headers mb-5'>
+
+            </div>
+
+            <div className='inside-section mt-5'>
                 {data.length === 0 && <div>No Data Found</div>}
 
-                <div className='text-center mb- fs-1'>
-                    <h1>{data[step]?.question}</h1>
+                <div>
+                    {show ? <></> : <div>
+                        <h1>{step + 1}/{data.length} </h1>
+                    </div>}
                 </div>
+                {show ? <></> : <div className='text-center'>
+                    <h1 className='questions'>{step + 1}.{data[step]?.question}</h1>
+                </div>}
                 {show ? <>
                     <div className='text-center mb- fs-1'>
 
-                        <div className='text-center'>
-                            {sources === 0 && <h1>😭</h1>}
-                            {sources === 1 && <h1>🥲</h1>}
-                            {sources === 2 && <h1>☹️</h1>}
-                            {sources === 3 && <h1>😁</h1>}
-                            {sources === 4 && <h1>😎</h1>}
-                            {sources === 5 && <h1>🤩</h1>}
+                        <div className='text-center mb-4'>
+                            {sources === 0 && <h1 style={{ fontSize: "5rem" }}>😭</h1>}
+                            {sources === 1 && <h1 style={{ fontSize: "5rem" }}>🥲</h1>}
+                            {sources === 2 && <h1 style={{ fontSize: "5rem" }}>☹️</h1>}
+                            {sources === 3 && <h1 style={{ fontSize: "5rem" }}>😁</h1>}
+                            {sources === 4 && <h1 style={{ fontSize: "5rem" }}>😎</h1>}
+                            {sources === 5 && <h1 style={{ fontSize: "5rem" }}>🤩</h1>}
                         </div>
-                        <h1>question {sources}/{data.length}  </h1>
-                        <div>
-                            <button onClick={ReStart}>Restart</button>
+                        <div className='mt-5 mb-3'>
+                            <h1>Your Score {sources}/{data.length}  </h1>
+                        </div>
+                        <div className='mt-5'>
+                            <button onClick={ReStart} className="restart">Restart</button>
                         </div>
                     </div>
                 </> : <>
 
-                    <div>
+                    {/* <div>
                         <h1>{step + 1}.question Correct {step + 1}/{data.length} </h1>
+                    </div> */}
+                    <div className='mt-5'>
+                        {data[step]?.answeroptions?.map((items, index) => {
+                            return (
+                                <div key={index} className="mb-3">
+                                    <button className='buttons mt-2 ' onClick={() => handlemove(items?.isCorrect)}>{items?.answertext}</button>
+                                </div>
+                            )
+                        })}
                     </div>
-                    {data[step]?.answeroptions?.map((items, index) => {
-                        return (
-                            <div key={index}>
-                                <button className='buttons mt-2 ' onClick={() => handlemove(items?.isCorrect)}>{items?.answertext}</button>
-                            </div>
-                        )
-                    })}
                 </>}
 
                 <>
@@ -131,33 +165,32 @@ function Home() {
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <h5 class="modal-title text-center" id="staticBackdropLabel">Test</h5>
+                                    {/* <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> */}
                                 </div>
                                 <div class="modal-body">
                                     <form onSubmit={sendMail}>
-                                        <div class="mb-4 col-sm-6  col-md-6 col-lg-8">
+                                        <div class="mb-4 col-sm-6  col-md-6 col-lg-12">
                                             <label for="exampleInputEmail1" class="form-label">User Name</label>
-                                            <input type="text" class="form-control" name="username" id="exampleInputname1" required />
-                                            <div id="emailHelp" class="form-text">
-                                            </div>
+                                            <input type="text" class="form-control" name="user_name" id="exampleInputname1" onChange={handleChange} value={user_name} required />
+
                                         </div>
-                                        <div class="mb-4 col-sm-6 col-md-6 col-lg-8">
+                                        <div class="mb-4 col-sm-6 col-md-6 col-lg-12">
                                             <label for="exampleInputPassword1" class="form-label">Email</label>
-                                            <input type="text" class="form-control" name="email" id="exampleInputeMail1" required />
+                                            <input type="email" class="form-control" name="user_email" id="exampleInputeMail1" onChange={handleChange} value={user_email} required />
                                         </div>
-                                        <div class="mb-4 col-sm-6 col-md-6 col-lg-8">
+
+                                        <div class="mb-4 col-sm-6 col-md-6 col-lg-12">
                                             <label for="exampleInputPassword1" class="form-label">Your Soure</label>
-                                            <input type="text" class="form-control" name="message" id="exampleInputeMai1" value={`
-                                            ${sources} / ${data.length}`} required disabled />
+                                            <input type="text" class="form-control" name="user_score" value={user_score} id="exampleInputeMai1" onChange={handleChange} required />
                                         </div>
-                                        <button type="submit" class="btn btn-primarys">Submit</button>
+                                        <button type="submit" class="submit">Submit</button>
                                     </form>
                                 </div>
-                                <div class="modal-footer">
+                                {/* <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                     <button type="button" class="btn btn-primary">Understood</button>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>

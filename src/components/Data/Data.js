@@ -1,44 +1,44 @@
 const datas = [
     {
         id: 1,
-        question: "what is u r favor?",
+        question: "what is your favorate ?",
         answeroptions: [
             {
-                answertext: "first",
+                answertext: "Cookies",
                 isCorrect: false,
             },
             {
-                answertext: "second",
+                answertext: "Chocolate",
                 isCorrect: false,
             },
             {
-                answertext: "third",
+                answertext: "Juice",
                 isCorrect: true,
             },
             {
-                answertext: "fourth",
+                answertext: "Five star",
                 isCorrect: false,
             }
         ]
     },
     {
         id: 2,
-        question: "what is u r city?",
+        question: "what is your Favorate city?",
         answeroptions: [
             {
-                answertext: "chennai",
+                answertext: "Chennai",
                 isCorrect: false,
             },
             {
-                answertext: "madurai",
+                answertext: "Hosur",
                 isCorrect: false,
             },
             {
-                answertext: "krishnagiri",
+                answertext: "Krishnagiri",
                 isCorrect: true,
             },
             {
-                answertext: "mathur",
+                answertext: "Bangalore",
                 isCorrect: false,
             }
         ]
