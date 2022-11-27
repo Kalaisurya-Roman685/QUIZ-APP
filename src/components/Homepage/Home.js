@@ -104,7 +104,7 @@ function Home() {
                             {sources === 4 && <h1>😎</h1>}
                             {sources === 5 && <h1>🤩</h1>}
                         </div>
-                        <h1>question Correct {sources}/{data.length}  </h1>
+                        <h1>question {sources}/{data.length}  </h1>
                         <div>
                             <button onClick={ReStart}>Restart</button>
                         </div>
@@ -112,7 +112,7 @@ function Home() {
                 </> : <>
 
                     <div>
-                        <h1>question Coorect {step + 1}/{data.length} </h1>
+                        <h1>{step + 1}.question Correct {step + 1}/{data.length} </h1>
                     </div>
                     {data[step]?.answeroptions?.map((items, index) => {
                         return (
