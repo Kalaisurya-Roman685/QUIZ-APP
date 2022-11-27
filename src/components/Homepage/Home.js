@@ -7,6 +7,7 @@ import { Modal } from "bootstrap";
 import emailjs from "emailjs-com";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from 'axios';
 
 function Home() {
     const userefs = useRef(null);
@@ -63,13 +64,14 @@ function Home() {
     const [sendmails, setSendMail] = useState({
         user_name: "",
         user_email: "",
-        user_score: ""
     });
 
-    const { user_email, user_name, user_score } = sendmails;
+    const [userScores, setUserScore] = useState("");
+
+    const { user_email, user_name } = sendmails;
 
     const handleChange = (e) => {
-        setSendMail({ ...Home.sendmails, [e.target.name]: arguments.target.value });
+        setSendMail({ ...sendmails, [e.target.name]: e.target.value });
     }
 
 
@@ -78,13 +80,33 @@ function Home() {
     const sendMail = (e) => {
         e.preventDefault();
 
-        console.log(sendmails, "kalai amma appa");
+
+
+
+        var data = {
+            service_id: "service_0j09nsj",
+            template_id: "template_5oi5g9m",
+            user_id: "eeQPh4VywDAhd_nkk",
+            template_params: {
+                user_name: user_name,
+                user_email: user_email,
+                user_score: sources
+            }
+
+
+        };
+
+
+        console.log(data, "kalai");
+
+        // console.log(datas, "kalai amma appa");
         // emailjs
         //     .sendForm(
-        //         "service_9w8q0y9",
-        //         "template_1xpu9zq",
-        //         datas,
-        //         "WjaU6fWuAvTLzZ6cY"
+        //         // "service_9w8q0y9",
+        //         // "template_1xpu9zq",
+        //         // "WjaU6fWuAvTLzZ6cY",
+        //         // datas
+        //         data
         //     )
         //     .then((e) => {
         //         console.log(e.text);
@@ -97,10 +119,13 @@ function Home() {
         //     });
         // e.target.reset();
 
+        axios.post('https://api.emailjs.com/api/v1.0/email/send', data).then(function () {
+            toast("Successfully Send Message...😀");
+            hideModal()
 
-
-
-
+        }).catch(function (error) {
+            toast(` ${error}+🥺`)
+        });
     };
 
     return (
@@ -134,11 +159,14 @@ function Home() {
                             {sources === 4 && <h1 style={{ fontSize: "5rem" }}>😎</h1>}
                             {sources === 5 && <h1 style={{ fontSize: "5rem" }}>🤩</h1>}
                         </div>
-                        <div className='mt-5 mb-3'>
-                            <h1>Your Score {sources}/{data.length}  </h1>
-                        </div>
                         <div className='mt-5'>
-                            <button onClick={ReStart} className="restart">Restart</button>
+                            <h1 style={{ fontSize: "4rem", fontWeight: "600" }}>Thank You</h1>
+                        </div>
+                        {/* <div className='mt-5 mb-3'>
+                            <h1>Your Score {sources}/{data.length}  </h1>
+                        </div> */}
+                        <div className='mt-5'>
+                            {/* <button onClick={ReStart} className="restart">Restart</button> */}
                         </div>
                     </div>
                 </> : <>
@@ -172,26 +200,23 @@ function Home() {
                                     <form onSubmit={sendMail}>
                                         <div class="mb-4 col-sm-6  col-md-6 col-lg-12">
                                             <label for="exampleInputEmail1" class="form-label">User Name</label>
-                                            <input type="text" class="form-control" name="user_name" id="exampleInputname1" onChange={handleChange} value={user_name} required />
+                                            <input type="text" class="form-control" name="user_name" onChange={handleChange} value={user_name} required />
                                             <div id="emailHelp" class="form-text">
                                             </div>
                                         </div>
                                         <div class="mb-4 col-sm-6 col-md-6 col-lg-12">
                                             <label for="exampleInputPassword1" class="form-label">Email</label>
-                                            <input type="email" class="form-control" name="user_email" id="exampleInputeMail1" onChange={handleChange} value={user_email} required />
+                                            <input type="email" class="form-control" name="user_email" onChange={handleChange} value={user_email} required />
                                         </div>
 
                                         <div class="mb-4 col-sm-6 col-md-6 col-lg-12">
-                                            <label for="exampleInputPassword1" class="form-label">Your Soure</label>
-                                            <input type="text" class="form-control" name="user_score" value={sources} id="exampleInputeMai1" onChange={handleChange} required />
+                                            <label for="exampleInputPassword1" class="form-label">Message</label>
+                                            <input type="text" class="form-control" name="user_score" value={userScores} onChange={(e) => setUserScore(e.target.value)} required />
                                         </div>
-                                        <button type="submit" class="submit">Submit</button>
+                                        <button type="submit" class="submit">Submit Test</button>
                                     </form>
                                 </div>
-                                {/* <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Understood</button>
-                                </div> */}
+
                             </div>
                         </div>
                     </div>
