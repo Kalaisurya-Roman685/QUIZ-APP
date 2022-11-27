@@ -1,3 +1,5 @@
+@use "../../../scss/abstract/" as *;
+
 .main-section {
     width: 100%;
     height: 100vh;
@@ -14,8 +16,20 @@
         justify-content: center;
         flex-direction: column;
         box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        @include xsBreakPoint {
+            width: 100%;
+        }
         .questions {
             font-size: 1.3rem;
+            @include xsBreakPoint {
+                font-size: 1.6rem !important;
+            }
+            @include smBreakPoint {
+                font-size: 2rem !important;
+            }
+            @include mdBreakPoint {
+                font-size: 2.5rem !important;
+            }
         }
     }
     .buttons {
@@ -35,6 +49,15 @@
         font-weight: bold;
         border-radius: 10px;
         margin: 0 auto;
+        @include xsBreakPoint {
+            width: 100%;
+        }
+        @include smBreakPoint {
+            width: 80%;
+        }
+        @include mdBreakPoint {
+            width: 60%;
+        }
     }
     .buttons:hover {
         background-color: lightgray;

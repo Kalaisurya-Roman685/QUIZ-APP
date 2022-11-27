@@ -173,7 +173,8 @@ function Home() {
                                         <div class="mb-4 col-sm-6  col-md-6 col-lg-12">
                                             <label for="exampleInputEmail1" class="form-label">User Name</label>
                                             <input type="text" class="form-control" name="user_name" id="exampleInputname1" onChange={handleChange} value={user_name} required />
-
+                                            <div id="emailHelp" class="form-text">
+                                            </div>
                                         </div>
                                         <div class="mb-4 col-sm-6 col-md-6 col-lg-12">
                                             <label for="exampleInputPassword1" class="form-label">Email</label>
@@ -182,7 +183,7 @@ function Home() {
 
                                         <div class="mb-4 col-sm-6 col-md-6 col-lg-12">
                                             <label for="exampleInputPassword1" class="form-label">Your Soure</label>
-                                            <input type="text" class="form-control" name="user_score" value={user_score} id="exampleInputeMai1" onChange={handleChange} required />
+                                            <input type="text" class="form-control" name="user_score" value={sources} id="exampleInputeMai1" onChange={handleChange} required />
                                         </div>
                                         <button type="submit" class="submit">Submit</button>
                                     </form>
